@@ -21,8 +21,22 @@ export default function QuotePage({ params }: { params: { vertical: string } }) 
   const v = getVertical(params.vertical);
   if (!v) notFound();
 
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    name: v.name,
+    description: v.consumerSub,
+    areaServed: { "@type": "Country", name: "South Africa" },
+    provider: { "@type": "Organization", name: "LeadBron", url: "https://leadbron.vercel.app" },
+    offers: { "@type": "Offer", price: "0", priceCurrency: "ZAR", description: "Free quote — no obligation" },
+  };
+
   return (
     <main>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       <section className="bg-ink py-14 text-mist">
         <div className="mx-auto max-w-3xl px-5">
           <p className="font-mono text-xs uppercase tracking-[0.3em] text-brass">{v.name}</p>

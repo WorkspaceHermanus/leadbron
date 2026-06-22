@@ -5,9 +5,11 @@ import { useState } from "react";
 export default function LeadForm({
   vertical,
   provinces,
+  defaultProvince,
 }: {
   vertical: string;
   provinces: string[];
+  defaultProvince?: string;
 }) {
   const [state, setState] = useState<"idle" | "busy" | "done" | "error">("idle");
   const [error, setError] = useState("");
@@ -103,7 +105,7 @@ export default function LeadForm({
         </div>
         <div className="sm:col-span-2">
           <label htmlFor="province">Province</label>
-          <select id="province" defaultValue="">
+          <select id="province" defaultValue={defaultProvince ?? ""}>
             <option value="" disabled>
               Choose your province
             </option>

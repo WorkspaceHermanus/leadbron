@@ -61,6 +61,22 @@ export const PROVINCES = [
   "Northern Cape",
 ];
 
+export const PROVINCE_SLUGS: Record<string, string> = {
+  "western-cape": "Western Cape",
+  gauteng: "Gauteng",
+  "kwazulu-natal": "KwaZulu-Natal",
+  "eastern-cape": "Eastern Cape",
+  "free-state": "Free State",
+  limpopo: "Limpopo",
+  mpumalanga: "Mpumalanga",
+  "north-west": "North West",
+  "northern-cape": "Northern Cape",
+};
+
+export function getProvince(slug: string): string | undefined {
+  return PROVINCE_SLUGS[slug];
+}
+
 export function getVertical(slug: string): Vertical | undefined {
   return VERTICALS.find((v) => v.slug === slug);
 }

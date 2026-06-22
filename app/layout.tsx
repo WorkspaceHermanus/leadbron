@@ -35,6 +35,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <div className="flex items-center gap-6 text-sm font-medium">
               <Link href="/quote" className="text-moss hover:text-ink">Get a quote</Link>
               <Link href="/advisers" className="text-moss hover:text-ink">For advisers</Link>
+              <Link href="/partner" className="text-moss hover:text-ink">Embed</Link>
               <Link href="/buy" className="btn-brass !px-4 !py-2 text-sm">Buy leads</Link>
             </div>
           </nav>
