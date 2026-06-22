@@ -1,0 +1,41 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --font-display: "Archivo", system-ui, sans-serif;
+  --font-body: "IBM Plex Sans", system-ui, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, monospace;
+  --ink: #11241e;
+  --pine: #1b3a30;
+  --moss: #2e5546;
+  --mist: #f2f5f1;
+  --brass: #c9972c;
+  --signal: #d44b2e;
+}
+
+body {
+  background: var(--mist);
+  color: var(--ink);
+}
+
+/* Lead ticker tape */
+@keyframes tape {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+.tape-track {
+  animation: tape 38s linear infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  .tape-track { animation: none; }
+}
+
+input, select, textarea {
+  @apply w-full rounded-md border border-moss/30 bg-white px-3 py-2.5 text-ink outline-none focus:border-brass focus:ring-2 focus:ring-brass/30;
+}
+label { @apply mb-1 block font-mono text-[11px] uppercase tracking-widest text-moss; }
+
+.btn-brass {
+  @apply inline-block rounded-md bg-brass px-6 py-3 font-semibold text-ink transition hover:bg-brassdeep hover:text-white focus:outline-none focus:ring-2 focus:ring-brass/50;
+}

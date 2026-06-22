@@ -1,0 +1,59 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum LeadStatus {
+  AVAILABLE
+  SOLD
+}
+
+enum OrderStatus {
+  PENDING
+  PAID
+  PARTIAL
+  FULFILLED
+  CANCELLED
+}
+
+model Lead {
+  id        String     @id @default(cuid())
+  vertical  String
+  firstName String
+  lastName  String
+  email     String
+  phone     String
+  province  String
+  notes     String?
+  source    String? // utm_source / campaign tag
+  consentAt DateTime // POPIA consent timestamp
+  consentIp String?
+  status    LeadStatus @default(AVAILABLE)
+  orderId   String?
+  order     Order?     @relation(fields: [orderId], references: [id])
+  createdAt DateTime   @default(now())
+
+  @@index([vertical, status])
+}
+
+model Order {
+  id             String      @id @default(cuid())
+  adviserName    String
+  adviserEmail   String
+  adviserPhone   String?
+  vertical       String
+  quantity       Int
+  unitPriceCents Int
+  amountCents    Int
+  status         OrderStatus @default(PENDING)
+  deliveredCount Int         @default(0)
+  pfPaymentId    String?
+  leads          Lead[]
+  createdAt      DateTime    @default(now())
+
+  @@index([vertical, status])
+}
