@@ -1,6 +1,6 @@
 import { prisma } from "@/lib/prisma";
 import { getVertical } from "@/lib/verticals";
-import { Resend } from "resend";
+import nodemailer from "nodemailer";
 
 function leadsToCsv(
   leads: {
@@ -32,11 +32,23 @@ function leadsToCsv(
   return [header, ...rows].join("\n");
 }
 
+function createTransport() {
+  return nodemailer.createTransport({
+    host: "smtp.gmail.com",
+    port: 587,
+    secure: false,
+    auth: {
+      user: process.env.GMAIL_USER,
+      pass: process.env.GMAIL_APP_PASSWORD,
+    },
+  });
+}
+
 /**
  * Core automation. Allocates AVAILABLE leads to a PAID/PARTIAL order,
  * marks them SOLD, emails them to the adviser, and updates order status.
- * Safe to call repeatedly: from the PayFast ITN webhook (after payment)
- * and from the lead-intake endpoint (drip-fill of open orders).
+ * Safe to call repeatedly: from the PayFast ITN webhook and from the
+ * lead-intake endpoint (drip-fill of open orders).
  */
 export async function fulfilOrder(orderId: string): Promise<void> {
   const order = await prisma.order.findUnique({ where: { id: orderId } });
@@ -46,7 +58,6 @@ export async function fulfilOrder(orderId: string): Promise<void> {
   const needed = order.quantity - order.deliveredCount;
   if (needed <= 0) return;
 
-  // Claim leads atomically-ish: pick ids, then conditionally update.
   const candidates = await prisma.lead.findMany({
     where: { vertical: order.vertical, status: "AVAILABLE" },
     orderBy: { createdAt: "asc" },
@@ -97,17 +108,17 @@ async function emailLeads(
   leads: Parameters<typeof leadsToCsv>[0],
   progress: { delivered: number; total: number }
 ): Promise<void> {
-  const apiKey = process.env.RESEND_API_KEY;
-  if (!apiKey) {
-    console.warn("RESEND_API_KEY not set — leads allocated but email not sent.");
+  if (!process.env.GMAIL_USER || !process.env.GMAIL_APP_PASSWORD) {
+    console.warn("GMAIL_USER or GMAIL_APP_PASSWORD not set — leads allocated but email not sent.");
     return;
   }
-  const resend = new Resend(apiKey);
+
   const vertical = getVertical(verticalSlug)?.name ?? verticalSlug;
   const remaining = progress.total - progress.delivered;
 
-  await resend.emails.send({
-    from: process.env.MAIL_FROM ?? "LeadBron <onboarding@resend.dev>",
+  const transport = createTransport();
+  await transport.sendMail({
+    from: `"LeadBron" <${process.env.GMAIL_USER}>`,
     to,
     subject: `Your ${vertical} leads (${progress.delivered}/${progress.total})`,
     text:
@@ -122,6 +133,7 @@ async function emailLeads(
       {
         filename: `leads-${verticalSlug}-${new Date().toISOString().slice(0, 10)}.csv`,
         content: Buffer.from(leadsToCsv(leads)).toString("base64"),
+        encoding: "base64",
       },
     ],
   });
