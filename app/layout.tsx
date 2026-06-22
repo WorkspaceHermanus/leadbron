@@ -13,6 +13,7 @@ export const metadata: Metadata = {
     locale: "en_ZA",
   },
   twitter: { card: "summary_large_image" },
+  verification: { google: "RMQHjRTrsQnMOwl5-QSQfke5DwX9HdrqdOSRP0p28_8" },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
