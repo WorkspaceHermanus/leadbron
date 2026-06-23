@@ -3,7 +3,7 @@ import Link from "next/link";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "LeadBron — verified leads for South African financial advisers",
+  title: "LeadBron",
   description:
     "Buy fresh, POPIA-consented insurance and financial leads. Delivered to your inbox automatically, the moment you pay.",
   metadataBase: new URL("https://leadbron.vercel.app"),
