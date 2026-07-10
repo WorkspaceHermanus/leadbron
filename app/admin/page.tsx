@@ -22,10 +22,11 @@ export default async function Admin({
     );
   }
 
-  const [leads, orders, available] = await Promise.all([
+  const [leads, orders, available, qualifiedLeads] = await Promise.all([
     prisma.lead.findMany({ orderBy: { createdAt: "desc" }, take: 100 }),
     prisma.order.findMany({ orderBy: { createdAt: "desc" }, take: 100 }),
     prisma.lead.groupBy({ by: ["vertical"], where: { status: "AVAILABLE" }, _count: { _all: true } }),
+    prisma.qualifiedLead.findMany({ orderBy: { createdAt: "desc" }, take: 50 }),
   ]);
 
   const revenueCents = orders
@@ -56,6 +57,20 @@ export default async function Admin({
           String(o.deliveredCount),
           rand(o.amountCents),
           o.status,
+        ])}
+      />
+
+      <h2 className="mt-12 font-display text-xl font-700">AI Qualified Leads</h2>
+      <Table
+        head={["When", "Name", "Phone", "Category", "Confidence", "Intent", "Status"]}
+        rows={qualifiedLeads.map((l) => [
+          l.createdAt.toISOString().slice(0, 16).replace("T", " "),
+          `${l.firstName} ${l.lastName}`,
+          l.phone,
+          l.leadCategory,
+          `${l.confidenceScore}%`,
+          l.intent,
+          l.disqualificationReason ? "Disqualified" : "Qualified",
         ])}
       />
 

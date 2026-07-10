@@ -12,6 +12,29 @@ enum LeadStatus {
   SOLD
 }
 
+enum ConversationStatus {
+  ACTIVE
+  COMPLETED
+  ABANDONED
+}
+
+enum LeadCategory {
+  LIFE_INSURANCE
+  SHORT_TERM
+  MEDICAL_AID
+  WILLS_TRUSTS
+  BUSINESS
+  INVESTMENT
+  RETIREMENT
+  GENERAL
+}
+
+enum LeadIntent {
+  HIGH
+  MEDIUM
+  LOW
+}
+
 enum OrderStatus {
   PENDING
   PAID
@@ -21,23 +44,69 @@ enum OrderStatus {
 }
 
 model Lead {
-  id        String     @id @default(cuid())
-  vertical  String
-  firstName String
-  lastName  String
-  email     String
-  phone     String
-  province  String
-  notes     String?
-  source    String? // utm_source / campaign tag
-  consentAt DateTime // POPIA consent timestamp
-  consentIp String?
-  status    LeadStatus @default(AVAILABLE)
-  orderId   String?
-  order     Order?     @relation(fields: [orderId], references: [id])
-  createdAt DateTime   @default(now())
+  id                    String     @id @default(cuid())
+  vertical              String
+  firstName             String
+  lastName              String
+  email                 String
+  phone                 String
+  province              String
+  notes                 String?
+  source                String? // utm_source / campaign tag / "ai-chat"
+  consentAt             DateTime // POPIA consent timestamp
+  consentIp             String?
+  status                LeadStatus @default(AVAILABLE)
+  orderId               String?
+  order                 Order?     @relation(fields: [orderId], references: [id])
+  qualifiedLeadId       String? @unique
+  qualifiedLead         QualifiedLead? @relation(fields: [qualifiedLeadId], references: [id])
+  confidenceScore       Int?       // 0-100, inherited from AI
+  conversationTranscript Json?     // Full chat history for context
+  createdAt             DateTime   @default(now())
 
   @@index([vertical, status])
+}
+
+model Conversation {
+  id          String              @id @default(cuid())
+  visitorId   String              // Session-based identifier
+  messages    Json                // Array of {role, content, timestamp}
+  vertical    String?             // Determined during conversation
+  category    LeadCategory?       // Inferred category
+  status      ConversationStatus  @default(ACTIVE)
+  qualifiedLead QualifiedLead?
+  startedAt   DateTime            @default(now())
+  updatedAt   DateTime            @updatedAt
+
+  @@index([visitorId])
+  @@index([status])
+}
+
+model QualifiedLead {
+  id                      String     @id @default(cuid())
+  conversationId          String     @unique
+  conversation            Conversation @relation(fields: [conversationId], references: [id])
+  leadCategory            LeadCategory
+  firstName               String
+  lastName                String
+  email                   String
+  phone                   String
+  province                String
+  financialGoals          String?    // Summary of stated goals
+  productInterest         String?    // Specific Discovery products mentioned
+  confidenceScore         Int        // 0-100, AI assessment
+  qualificationNotes      String?
+  disqualificationReason  String?
+  conversationTranscript  Json       // Full chat history
+  intent                  LeadIntent
+  consentAt               DateTime   @default(now())
+  consentIp               String?
+  linkedLead              Lead?      // Linked to created Lead if opted into marketplace
+  createdAt               DateTime   @default(now())
+
+  @@index([leadCategory])
+  @@index([confidenceScore])
+  @@index([intent])
 }
 
 model Order {
