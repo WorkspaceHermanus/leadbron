@@ -1,6 +1,14 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
+import {
+  FLOW,
+  type Answer,
+  type LeadCategory,
+  isValidEmail,
+  isValidSaPhone,
+} from "@/lib/chat-flow";
+import { PROVINCES } from "@/lib/verticals";
 
 export type Message = {
   role: "user" | "assistant";
@@ -8,194 +16,304 @@ export type Message = {
   timestamp: string;
 };
 
-interface ChatInterfaceProps {
-  conversationId: string;
-  messages: Message[];
-  onSendMessage: (message: string) => Promise<void>;
-  isLoading: boolean;
-  onQualify: (consent: boolean) => Promise<void>;
-  isQualified: boolean;
-  onClose: () => void;
-}
+type Contact = {
+  firstName: string;
+  lastName: string;
+  email: string;
+  phone: string;
+  province: string;
+};
+
+const EMPTY_CONTACT: Contact = { firstName: "", lastName: "", email: "", phone: "", province: "" };
 
 export default function ChatInterface({
-  conversationId,
-  messages,
-  onSendMessage,
-  isLoading,
-  onQualify,
-  isQualified,
+  visitorId,
   onClose,
-}: ChatInterfaceProps) {
+}: {
+  visitorId: string;
+  onClose: () => void;
+}) {
+  const [stepId, setStepId] = useState("greeting");
+  const [messages, setMessages] = useState<Message[]>([]);
+  const [answers, setAnswers] = useState<Answer[]>([]);
+  const [contact, setContact] = useState<Contact>(EMPTY_CONTACT);
+  const [category, setCategory] = useState<LeadCategory>("GENERAL");
   const [input, setInput] = useState("");
-  const [error, setError] = useState("");
-  const [qualifyLoading, setQualifyLoading] = useState(false);
-  const [showQualifyPrompt, setShowQualifyPrompt] = useState(false);
-  const messagesEndRef = useRef<HTMLDivElement>(null);
+  const [inputError, setInputError] = useState("");
+  const [botTyping, setBotTyping] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState("");
+  const [finished, setFinished] = useState(false);
+  const bottomRef = useRef<HTMLDivElement>(null);
+  const spokenSteps = useRef<Set<string>>(new Set());
+
+  const step = FLOW[stepId];
+
+  // Speak the current step's bot line once, with a short typing delay.
+  // The "spoken" flag is only set when the message lands, so React 18
+  // StrictMode's mount-cleanup-mount cycle in dev doesn't swallow it.
+  useEffect(() => {
+    if (!step || spokenSteps.current.has(stepId)) return;
+    setBotTyping(true);
+    const t = setTimeout(() => {
+      spokenSteps.current.add(stepId);
+      setMessages((prev) => [
+        ...prev,
+        { role: "assistant", content: step.bot, timestamp: new Date().toISOString() },
+      ]);
+      setBotTyping(false);
+      if (step.kind === "end") setFinished(true);
+    }, 600);
+    return () => clearTimeout(t);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [stepId]);
 
   useEffect(() => {
-    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
-  }, [messages]);
+    bottomRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [messages, botTyping, submitting]);
 
-  const handleSendMessage = async (e: React.FormEvent) => {
+  function say(content: string) {
+    setMessages((prev) => [
+      ...prev,
+      { role: "user", content, timestamp: new Date().toISOString() },
+    ]);
+  }
+
+  function goTo(next: string) {
+    // Returning to a step (e.g. browsing -> greeting) should re-speak it.
+    spokenSteps.current.delete(next);
+    setStepId(next);
+  }
+
+  function handleOption(label: string) {
+    if (step.kind !== "options") return;
+    const option = step.options.find((o) => o.label === label);
+    if (!option) return;
+    say(label);
+    setAnswers((prev) => [
+      ...prev.filter((a) => a.stepId !== step.id),
+      { stepId: step.id, question: step.bot, answer: label },
+    ]);
+    if (option.category) setCategory(option.category);
+    goTo(option.next ?? step.next ?? "timing");
+  }
+
+  function handleInput(e: React.FormEvent) {
     e.preventDefault();
-    if (!input.trim() || isLoading) return;
+    if (step.kind !== "input") return;
+    const value = input.trim();
+    setInputError("");
 
-    setError("");
-    const message = input.trim();
+    if (!value) return;
+    if (step.field === "email" && !isValidEmail(value)) {
+      setInputError("That email address doesn't look right — please check it.");
+      return;
+    }
+    if (step.field === "phone" && !isValidSaPhone(value)) {
+      setInputError("Please enter a valid SA phone number (at least 9 digits).");
+      return;
+    }
+    if ((step.field === "firstName" || step.field === "lastName") && value.length < 2) {
+      setInputError("Please enter your full name.");
+      return;
+    }
+
+    say(step.field === "phone" || step.field === "email" ? value : value);
+    setContact((prev) => ({ ...prev, [step.field]: value }));
     setInput("");
+    goTo(step.next);
+  }
+
+  function handleProvince(province: string) {
+    if (step.kind !== "province") return;
+    say(province);
+    setContact((prev) => ({ ...prev, province }));
+    goTo(step.next);
+  }
+
+  async function handleConsent(agreed: boolean) {
+    if (!agreed) {
+      say("Not now");
+      goTo("goodbye");
+      return;
+    }
+    say("I agree — request my call");
+    setSubmitting(true);
+    setSubmitError("");
+
+    const finalTranscript: Message[] = [
+      ...messages,
+      { role: "user", content: "I agree — request my call (POPIA consent)", timestamp: new Date().toISOString() },
+    ];
 
     try {
-      await onSendMessage(message);
-      // Check if we should show qualify prompt after a certain number of messages
-      if (messages.length > 4 && messages.length % 4 === 0) {
-        setShowQualifyPrompt(true);
+      const res = await fetch("/api/chat/qualify", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          visitorId,
+          category,
+          answers,
+          contact,
+          consent: true,
+          transcript: finalTranscript,
+          source:
+            new URLSearchParams(window.location.search).get("utm_source") ?? "chat",
+        }),
+      });
+      const data = await res.json().catch(() => ({}));
+      if (res.ok && data.ok) {
+        goTo("done");
+      } else {
+        setSubmitError(data.error ?? "Something went wrong — please try again.");
       }
-    } catch (err) {
-      setError("Failed to send message. Please try again.");
-    }
-  };
-
-  const handleQualify = async (consent: boolean) => {
-    setQualifyLoading(true);
-    try {
-      await onQualify(consent);
-      setShowQualifyPrompt(false);
-    } catch (err) {
-      setError("Failed to qualify. Please try again.");
+    } catch {
+      setSubmitError("Connection problem — please try again.");
     } finally {
-      setQualifyLoading(false);
+      setSubmitting(false);
     }
-  };
+  }
+
+  const showControls = !botTyping && !submitting && !finished;
 
   return (
-    <div className="flex h-full flex-col bg-white rounded-lg border border-moss/20 shadow-lg">
+    <div className="flex h-full flex-col rounded-lg border border-moss/20 bg-white shadow-xl">
       {/* Header */}
-      <div className="border-b border-moss/20 bg-ink text-mist px-4 py-3 flex items-center justify-between rounded-t-lg">
+      <div className="flex items-center justify-between rounded-t-lg border-b border-moss/20 bg-ink px-4 py-3 text-mist">
         <div>
-          <p className="font-semibold">LeadBron Advisor</p>
-          <p className="text-xs text-mist/70">Powered by AI</p>
+          <p className="font-display font-700">LeadBron Assistant</p>
+          <p className="text-xs text-mist/70">Free quotes · accredited advisers</p>
         </div>
-        <button
-          onClick={onClose}
-          className="text-mist/60 hover:text-mist transition"
-          aria-label="Close chat"
-        >
+        <button onClick={onClose} className="text-mist/60 transition hover:text-mist" aria-label="Close chat">
           ✕
         </button>
       </div>
 
       {/* Messages */}
-      <div className="flex-1 overflow-y-auto p-4 space-y-3">
-        {messages.length === 0 ? (
-          <div className="text-center text-moss/70 py-8">
-            <p className="text-sm">Start chatting to explore your options</p>
-          </div>
-        ) : (
-          messages.map((msg, i) => (
+      <div className="flex-1 space-y-3 overflow-y-auto p-4">
+        {messages.map((msg, i) => (
+          <div key={i} className={`flex ${msg.role === "user" ? "justify-end" : "justify-start"}`}>
             <div
-              key={i}
-              className={`flex ${msg.role === "user" ? "justify-end" : "justify-start"}`}
+              className={`max-w-[85%] rounded-lg px-4 py-2 text-sm ${
+                msg.role === "user"
+                  ? "rounded-br-none bg-brass text-white"
+                  : "rounded-bl-none bg-mist text-ink"
+              }`}
             >
-              <div
-                className={`max-w-xs px-4 py-2 rounded-lg text-sm ${
-                  msg.role === "user"
-                    ? "bg-brass text-white rounded-br-none"
-                    : "bg-moss/20 text-ink rounded-bl-none"
-                }`}
-              >
-                {msg.content}
-              </div>
+              {msg.content}
             </div>
-          ))
-        )}
+          </div>
+        ))}
 
-        {isLoading && (
+        {(botTyping || submitting) && (
           <div className="flex justify-start">
-            <div className="bg-moss/20 text-ink px-4 py-2 rounded-lg rounded-bl-none">
+            <div className="rounded-lg rounded-bl-none bg-mist px-4 py-3">
               <div className="flex gap-1">
-                <div className="w-2 h-2 bg-ink rounded-full animate-bounce" />
-                <div className="w-2 h-2 bg-ink rounded-full animate-bounce" style={{ animationDelay: "0.2s" }} />
-                <div className="w-2 h-2 bg-ink rounded-full animate-bounce" style={{ animationDelay: "0.4s" }} />
+                <span className="h-2 w-2 animate-bounce rounded-full bg-moss" />
+                <span className="h-2 w-2 animate-bounce rounded-full bg-moss" style={{ animationDelay: "0.15s" }} />
+                <span className="h-2 w-2 animate-bounce rounded-full bg-moss" style={{ animationDelay: "0.3s" }} />
               </div>
             </div>
           </div>
         )}
 
-        {/* Qualify Prompt */}
-        {showQualifyPrompt && !isQualified && (
-          <div className="bg-brass/10 border border-brass/30 rounded-lg p-3 mt-4">
-            <p className="text-sm text-ink font-semibold mb-3">
-              Would you like an accredited adviser to contact you about your needs?
-            </p>
-            <p className="text-xs text-moss mb-3">
-              Your information will be shared with a qualified adviser (POPIA consent required).
-            </p>
-            <div className="flex gap-2">
-              <button
-                onClick={() => handleQualify(true)}
-                disabled={qualifyLoading}
-                className="flex-1 bg-brass text-white px-3 py-2 rounded text-sm font-semibold hover:bg-brassdeep disabled:opacity-60 transition"
-              >
-                {qualifyLoading ? "Processing..." : "Yes, contact me"}
-              </button>
-              <button
-                onClick={() => handleQualify(false)}
-                disabled={qualifyLoading}
-                className="flex-1 border border-moss/20 text-ink px-3 py-2 rounded text-sm font-semibold hover:bg-moss/10 disabled:opacity-60 transition"
-              >
-                Not now
-              </button>
-            </div>
-          </div>
-        )}
-
-        {isQualified && (
-          <div className="bg-green-50 border border-green-300 rounded-lg p-3 mt-4">
-            <p className="text-sm text-green-900 font-semibold">✓ Your request has been received</p>
-            <p className="text-xs text-green-800 mt-1">
-              An accredited adviser will contact you shortly.
-            </p>
-          </div>
-        )}
-
-        {error && (
-          <div className="bg-signal/10 border border-signal/30 rounded-lg p-3 mt-4">
-            <p className="text-sm text-signal">{error}</p>
-          </div>
-        )}
-
-        <div ref={messagesEndRef} />
-      </div>
-
-      {/* Input */}
-      {!isQualified && (
-        <form
-          onSubmit={handleSendMessage}
-          className="border-t border-moss/20 p-3 bg-mist/50"
-        >
-          <div className="flex gap-2">
-            <input
-              type="text"
-              value={input}
-              onChange={(e) => setInput(e.target.value)}
-              placeholder="Type your message..."
-              disabled={isLoading}
-              className="flex-1 px-3 py-2 rounded-md border border-moss/20 text-sm focus:outline-none focus:ring-2 focus:ring-brass disabled:opacity-60"
-            />
+        {submitError && (
+          <div className="rounded-lg border border-signal/30 bg-signal/10 p-3">
+            <p className="text-sm text-signal">{submitError}</p>
             <button
-              type="submit"
-              disabled={isLoading || !input.trim()}
-              className="bg-brass text-white px-4 py-2 rounded-md font-semibold text-sm hover:bg-brassdeep disabled:opacity-60 transition"
+              onClick={() => handleConsent(true)}
+              className="mt-2 text-sm font-semibold text-brassdeep hover:text-brass"
             >
-              Send
+              Try again →
             </button>
           </div>
-          <p className="text-xs text-moss/60 mt-2">
-            Your information is protected by POPIA. We'll never share your details without consent.
+        )}
+
+        <div ref={bottomRef} />
+      </div>
+
+      {/* Controls */}
+      <div className="border-t border-moss/15 bg-mist/50 p-3">
+        {showControls && step.kind === "options" && (
+          <div className="flex flex-wrap gap-2">
+            {step.options.map((o) => (
+              <button
+                key={o.label}
+                onClick={() => handleOption(o.label)}
+                className="rounded-full border border-brass/50 bg-white px-3 py-1.5 text-sm font-medium text-ink transition hover:border-brass hover:bg-brass hover:text-white"
+              >
+                {o.label}
+              </button>
+            ))}
+          </div>
+        )}
+
+        {showControls && step.kind === "input" && (
+          <form onSubmit={handleInput}>
+            <div className="flex gap-2">
+              <input
+                type={step.field === "email" ? "email" : step.field === "phone" ? "tel" : "text"}
+                value={input}
+                onChange={(e) => setInput(e.target.value)}
+                placeholder={step.placeholder}
+                autoFocus
+                className="flex-1 rounded-md border border-moss/20 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-brass"
+              />
+              <button
+                type="submit"
+                disabled={!input.trim()}
+                className="rounded-md bg-brass px-4 py-2 text-sm font-semibold text-white transition hover:bg-brassdeep disabled:opacity-50"
+              >
+                Send
+              </button>
+            </div>
+            {inputError && <p className="mt-2 text-xs text-signal">{inputError}</p>}
+          </form>
+        )}
+
+        {showControls && step.kind === "province" && (
+          <div className="flex flex-wrap gap-2">
+            {PROVINCES.map((p) => (
+              <button
+                key={p}
+                onClick={() => handleProvince(p)}
+                className="rounded-full border border-brass/50 bg-white px-3 py-1.5 text-sm font-medium text-ink transition hover:border-brass hover:bg-brass hover:text-white"
+              >
+                {p}
+              </button>
+            ))}
+          </div>
+        )}
+
+        {showControls && step.kind === "consent" && (
+          <div className="flex flex-col gap-2">
+            <button
+              onClick={() => handleConsent(true)}
+              className="rounded-md bg-brass px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-brassdeep"
+            >
+              I agree — request my call
+            </button>
+            <button
+              onClick={() => handleConsent(false)}
+              className="rounded-md border border-moss/20 px-4 py-2 text-sm font-medium text-moss transition hover:bg-moss/10"
+            >
+              Not now
+            </button>
+          </div>
+        )}
+
+        {(finished || step.kind === "end") && !botTyping && (
+          <p className="text-center text-xs text-moss/70">
+            Protected by POPIA — your details are only shared with one accredited adviser, with your consent.
           </p>
-        </form>
-      )}
+        )}
+
+        {showControls && step.kind !== "end" && (
+          <p className="mt-2 text-center text-[11px] text-moss/60">
+            POPIA protected · no spam · one adviser only
+          </p>
+        )}
+      </div>
     </div>
   );
 }

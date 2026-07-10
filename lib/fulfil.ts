@@ -2,6 +2,17 @@ import { prisma } from "@/lib/prisma";
 import { getVertical } from "@/lib/verticals";
 import nodemailer from "nodemailer";
 
+function transcriptToText(transcript: unknown): string {
+  if (!Array.isArray(transcript)) return "";
+  return transcript
+    .map((m) => {
+      const who = m?.role === "user" ? "Lead" : "Assistant";
+      const content = String(m?.content ?? "").replace(/[\r\n]+/g, " ");
+      return `${who}: ${content}`;
+    })
+    .join(" | ");
+}
+
 function leadsToCsv(
   leads: {
     firstName: string;
@@ -12,9 +23,11 @@ function leadsToCsv(
     notes: string | null;
     consentAt: Date;
     createdAt: Date;
+    conversationTranscript?: unknown;
   }[]
 ): string {
-  const header = "first_name,last_name,email,phone,province,notes,consent_at,received_at";
+  const header =
+    "first_name,last_name,email,phone,province,notes,conversation,consent_at,received_at";
   const rows = leads.map((l) =>
     [
       l.firstName,
@@ -23,6 +36,7 @@ function leadsToCsv(
       l.phone,
       l.province,
       (l.notes ?? "").replace(/[\r\n,]+/g, " "),
+      transcriptToText(l.conversationTranscript),
       l.consentAt.toISOString(),
       l.createdAt.toISOString(),
     ]
