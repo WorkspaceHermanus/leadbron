@@ -48,7 +48,7 @@ export default function ChatWidget() {
 
   // Send initial message on first open
   useEffect(() => {
-    if (isOpen && messages.length === 0 && conversationId && !isLoading) {
+    if (isOpen && messages.length === 0 && !isLoading) {
       handleInitialMessage();
     }
   }, [isOpen]);
@@ -61,17 +61,26 @@ export default function ChatWidget() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           visitorId,
-          conversationId,
           message: "Hi, I'd like to learn more about financial products.",
         }),
       });
 
       if (response.ok) {
         const data = await response.json();
+        setConversationId(data.conversationId);
         setMessages([
           {
             role: "assistant",
             content: data.response,
+            timestamp: new Date().toISOString(),
+          },
+        ]);
+      } else {
+        setMessages([
+          {
+            role: "assistant",
+            content:
+              "Hi! I'm the LeadBron advisor assistant. I'm having a little trouble connecting right now — you can also request a call back via our quote form.",
             timestamp: new Date().toISOString(),
           },
         ]);
@@ -180,9 +189,6 @@ export default function ChatWidget() {
 
   const handleOpenChat = () => {
     setIsOpen(true);
-    if (!conversationId) {
-      setConversationId(`conv_${Date.now()}`);
-    }
   };
 
   const handleCloseChat = () => {
