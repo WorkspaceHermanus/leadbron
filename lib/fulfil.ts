@@ -13,6 +13,18 @@ function transcriptToText(transcript: unknown): string {
     .join(" | ");
 }
 
+/**
+ * Neutralise spreadsheet formula injection (CWE-1236). A visitor-controlled
+ * field like `=HYPERLINK(...)` or `+cmd|...` would otherwise be evaluated when
+ * an adviser opens the CSV in Excel/Sheets/LibreOffice. Prefix any cell that
+ * starts with a formula trigger with a single quote.
+ */
+function csvCell(value: unknown): string {
+  const s = String(value ?? "");
+  const safe = /^[=+\-@\t\r]/.test(s) ? `'${s}` : s;
+  return `"${safe.replace(/"/g, '""')}"`;
+}
+
 function leadsToCsv(
   leads: {
     firstName: string;
@@ -40,7 +52,7 @@ function leadsToCsv(
       l.consentAt.toISOString(),
       l.createdAt.toISOString(),
     ]
-      .map((v) => `"${String(v).replace(/"/g, '""')}"`)
+      .map(csvCell)
       .join(",")
   );
   return [header, ...rows].join("\n");

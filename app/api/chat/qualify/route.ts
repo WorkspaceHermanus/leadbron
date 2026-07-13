@@ -36,6 +36,10 @@ export async function POST(req: NextRequest) {
   const body = await req.json().catch(() => null);
   if (!body) return NextResponse.json({ error: "Invalid request." }, { status: 400 });
 
+  // Honeypot: silently accept bot submissions without storing them (mirrors
+  // /api/leads). Humans never see or fill the `website` field.
+  if (body.website) return NextResponse.json({ ok: true });
+
   if (body.consent !== true)
     return NextResponse.json(
       { error: "Consent is required before an adviser may contact you." },
@@ -107,6 +111,19 @@ export async function POST(req: NextRequest) {
 
   const consentIp = req.headers.get("x-forwarded-for")?.split(",")[0] ?? null;
   const source = body.source ? String(body.source).slice(0, 200) : "chat";
+
+  // Rate limit: cap chat leads from one IP to 5 per hour to blunt bot flooding.
+  // Accept quietly (like the honeypot/dupe paths) so bots get no signal.
+  if (consentIp) {
+    const recentFromIp = await prisma.lead.count({
+      where: {
+        consentIp,
+        source: "chat",
+        createdAt: { gte: new Date(Date.now() - 3600 * 1000) },
+      },
+    });
+    if (recentFromIp >= 5) return NextResponse.json({ ok: true });
+  }
 
   const conversation = await prisma.conversation.create({
     data: {
