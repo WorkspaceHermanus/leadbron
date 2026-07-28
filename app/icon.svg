@@ -1,4 +1,16 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
-  <rect width="32" height="32" rx="6" fill="#11241E"/>
-  <text x="7" y="24" font-family="Georgia, serif" font-weight="700" font-size="22" fill="#C9972C">L</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" role="img" aria-label="LeadBron">
+  <defs>
+    <linearGradient id="brass" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#E0AE3E"/>
+      <stop offset="100%" stop-color="#C9972C"/>
+    </linearGradient>
+  </defs>
+  <rect width="32" height="32" rx="7" fill="#11241E"/>
+  <!-- Ascending bars: a market/exchange mark. Pure geometry, so it renders
+       identically everywhere and stays legible down to 16px. -->
+  <g fill="url(#brass)">
+    <rect x="7"    y="18"  width="4.6" height="7.5" rx="2.3" opacity="0.55"/>
+    <rect x="13.7" y="13.5" width="4.6" height="12"  rx="2.3" opacity="0.78"/>
+    <rect x="20.4" y="7.5"  width="4.6" height="18"  rx="2.3"/>
+  </g>
 </svg>
