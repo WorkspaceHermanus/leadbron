@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { getVertical, VERTICALS, PROVINCES } from "@/lib/verticals";
+import { SITE_URL } from "@/lib/site";
 import LeadForm from "./lead-form";
 
 export function generateStaticParams() {
@@ -27,7 +28,7 @@ export default function QuotePage({ params }: { params: { vertical: string } }) 
     name: v.name,
     description: v.consumerSub,
     areaServed: { "@type": "Country", name: "South Africa" },
-    provider: { "@type": "Organization", name: "LeadBron", url: "https://leadbron.vercel.app" },
+    provider: { "@type": "Organization", name: "LeadBron", url: SITE_URL },
     offers: { "@type": "Offer", price: "0", priceCurrency: "ZAR", description: "Free quote — no obligation" },
   };
 

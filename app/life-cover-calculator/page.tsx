@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { PROVINCES } from "@/lib/verticals";
+import { SITE_URL } from "@/lib/site";
 import Calculator from "./calculator";
 
 const TITLE = "How much life cover do I need? — Free SA calculator";
@@ -50,13 +51,13 @@ export default function LifeCoverCalculatorPage() {
       name: "Life Cover Needs Calculator",
       applicationCategory: "FinanceApplication",
       operatingSystem: "Any",
-      url: "https://leadbron.vercel.app/life-cover-calculator",
+      url: `${SITE_URL}/life-cover-calculator`,
       description: DESCRIPTION,
       offers: { "@type": "Offer", price: "0", priceCurrency: "ZAR" },
       provider: {
         "@type": "Organization",
         name: "LeadBron",
-        url: "https://leadbron.vercel.app",
+        url: SITE_URL,
       },
     },
     {

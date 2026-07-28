@@ -25,7 +25,9 @@ export default function EmbedForm({
       setState("idle");
       return;
     }
-    const res = await fetch("https://leadbron.vercel.app/api/leads", {
+    // Relative: the iframe is served from our own origin, so this resolves
+    // correctly whichever domain the embed was installed from.
+    const res = await fetch("/api/leads", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({

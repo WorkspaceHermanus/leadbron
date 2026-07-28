@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { getVertical, getProvince, VERTICALS, PROVINCE_SLUGS, PROVINCES } from "@/lib/verticals";
+import { SITE_URL } from "@/lib/site";
 import LeadForm from "../lead-form";
 
 export function generateStaticParams() {
@@ -52,7 +53,7 @@ export default function ProvinceQuotePage({
     provider: {
       "@type": "Organization",
       name: "LeadBron",
-      url: "https://leadbron.vercel.app",
+      url: SITE_URL,
     },
     offers: {
       "@type": "Offer",

@@ -1,5 +1,6 @@
 import { notFound } from "next/navigation";
 import { getVertical, VERTICALS, PROVINCES } from "@/lib/verticals";
+import { SITE_URL } from "@/lib/site";
 import EmbedForm from "./embed-form";
 
 export const metadata = { robots: "noindex" };
@@ -22,7 +23,7 @@ export default function EmbedPage({ params }: { params: { vertical: string } }) 
         <EmbedForm vertical={v.slug} verticalName={v.name} provinces={PROVINCES} />
         <p style={{ textAlign: "center", marginTop: 14, fontSize: 11, color: "#8aa89e" }}>
           Powered by{" "}
-          <a href="https://leadbron.vercel.app" target="_blank" rel="noopener noreferrer" style={{ color: "#8aa89e" }}>
+          <a href={SITE_URL} target="_blank" rel="noopener noreferrer" style={{ color: "#8aa89e" }}>
             LeadBron
           </a>
         </p>

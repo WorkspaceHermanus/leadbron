@@ -54,7 +54,7 @@ export default function LeadForm({
 
   if (state === "done") {
     const shareText = encodeURIComponent(
-      "I just requested a free insurance quote from LeadBron — a qualified adviser calls you back. Try it: https://leadbron.vercel.app/quote"
+      "I just requested a free insurance quote from LeadBron — a qualified adviser calls you back. Try it: https://leadbron.co.za/quote"
     );
     const whatsappShare = `https://wa.me/?text=${shareText}`;
     return (

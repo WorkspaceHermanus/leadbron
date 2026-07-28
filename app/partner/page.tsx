@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { VERTICALS } from "@/lib/verticals";
+import { SITE_URL } from "@/lib/site";
 import CopyButton from "./copy-button";
 
 export const metadata: Metadata = {
@@ -22,7 +23,7 @@ export default function PartnerPage() {
 
       <div className="mt-12 space-y-10">
         {VERTICALS.map((v) => {
-          const code = `<iframe src="https://leadbron.vercel.app/embed/${v.slug}" width="100%" height="520" frameborder="0" style="border:none;border-radius:8px;"></iframe>`;
+          const code = `<iframe src="${SITE_URL}/embed/${v.slug}" width="100%" height="520" frameborder="0" style="border:none;border-radius:8px;"></iframe>`;
           return (
             <div key={v.slug} className="rounded-lg border border-moss/20 bg-white p-6">
               <p className="font-display text-lg font-700">{v.name}</p>

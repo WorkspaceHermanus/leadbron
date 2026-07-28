@@ -1,13 +1,14 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import ChatWidget from "./components/ChatWidget";
+import { SITE_URL } from "@/lib/site";
 import "./globals.css";
 
 export const metadata: Metadata = {
   title: "LeadBron",
   description:
     "Buy fresh, POPIA-consented insurance and financial leads. Delivered to your inbox automatically, the moment you pay.",
-  metadataBase: new URL("https://leadbron.vercel.app"),
+  metadataBase: new URL(SITE_URL),
   openGraph: {
     siteName: "LeadBron",
     type: "website",
