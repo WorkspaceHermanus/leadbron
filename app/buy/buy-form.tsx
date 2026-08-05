@@ -25,6 +25,7 @@ export default function BuyForm({
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [busy, setBusy] = useState(false);
+  const [acceptedTerms, setAcceptedTerms] = useState(false);
   const [error, setError] = useState("");
 
   const item = useMemo(() => catalogue.find((c) => c.slug === vertical)!, [catalogue, vertical]);
@@ -34,6 +35,10 @@ export default function BuyForm({
     setError("");
     if (!name.trim() || !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) {
       setError("Please fill in your name and a valid email — that's where your leads go.");
+      return;
+    }
+    if (!acceptedTerms) {
+      setError("Please accept the Terms & Conditions before continuing to payment.");
       return;
     }
     if (quantity < 1 || quantity > 500) {
@@ -123,11 +128,44 @@ export default function BuyForm({
         </p>
       )}
 
+      <label className="mt-5 flex cursor-pointer items-start gap-3 normal-case tracking-normal">
+        <input
+          id="terms"
+          type="checkbox"
+          checked={acceptedTerms}
+          onChange={(e) => setAcceptedTerms(e.target.checked)}
+          className="mt-1 h-4 w-4 !w-4"
+        />
+        <span className="text-sm normal-case tracking-normal text-ink">
+          I have read and accept the{" "}
+          <a href="/terms" target="_blank" className="text-brassdeep underline">
+            Terms &amp; Conditions
+          </a>
+          , including the{" "}
+          <a href="/terms#delivery" target="_blank" className="text-brassdeep underline">
+            delivery
+          </a>
+          ,{" "}
+          <a href="/terms#refunds" target="_blank" className="text-brassdeep underline">
+            refund
+          </a>{" "}
+          and{" "}
+          <a href="/terms#cancellation" target="_blank" className="text-brassdeep underline">
+            cancellation
+          </a>{" "}
+          policies.
+        </span>
+      </label>
+
       {error && <p className="mt-4 text-sm text-signal">{error}</p>}
 
       <button onClick={checkout} disabled={busy} className="btn-brass mt-6 disabled:opacity-60">
         {busy ? "Opening PayFast…" : "Pay with PayFast"}
       </button>
+      <p className="mt-3 text-xs text-moss">
+        Leads are emailed to you as a CSV as soon as payment is confirmed. Secure payment
+        by PayFast — we never see your card details.
+      </p>
     </div>
   );
 }

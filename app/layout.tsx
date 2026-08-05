@@ -56,9 +56,28 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               Every lead on this platform gave explicit, timestamped consent (POPIA) to be
               contacted by an accredited financial adviser. We never resell a lead.
             </p>
+            <div className="mt-6 flex flex-wrap gap-x-5 gap-y-2 border-t border-mist/15 pt-5 text-sm">
+              <Link href="/terms" className="underline hover:text-mist">
+                Terms &amp; Conditions
+              </Link>
+              <Link href="/terms#delivery" className="underline hover:text-mist">
+                Delivery Policy
+              </Link>
+              <Link href="/terms#refunds" className="underline hover:text-mist">
+                Refund Policy
+              </Link>
+              <Link href="/terms#cancellation" className="underline hover:text-mist">
+                Cancellation Policy
+              </Link>
+              <Link href="/privacy" className="underline hover:text-mist">
+                Privacy Policy
+              </Link>
+              <a href="mailto:support@leadbron.co.za" className="underline hover:text-mist">
+                Contact
+              </a>
+            </div>
             <p className="mt-4 font-mono text-xs">
-              © {new Date().getFullYear()} LeadBron · South Africa ·{" "}
-              <Link href="/privacy" className="underline hover:text-mist">Privacy Policy</Link>
+              © {new Date().getFullYear()} LeadBron · South Africa
             </p>
           </div>
         </footer>
