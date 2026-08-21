@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import ChatWidget from "./components/ChatWidget";
+import Analytics from "./components/Analytics";
 import { SITE_URL } from "@/lib/site";
 import "./globals.css";
 
@@ -82,6 +83,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           </div>
         </footer>
         <ChatWidget />
+        <Analytics />
       </body>
     </html>
   );

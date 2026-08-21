@@ -1,5 +1,6 @@
 import { MetadataRoute } from "next";
 import { VERTICALS, PROVINCE_SLUGS } from "@/lib/verticals";
+import { VERTICALS_AF } from "@/lib/verticals-af";
 import { SITE_URL } from "@/lib/site";
 
 const BASE = SITE_URL;
@@ -30,5 +31,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
     }))
   );
 
-  return [...staticPages, ...verticalPages, ...provincePages];
+  const afrikaansPages: MetadataRoute.Sitemap = VERTICALS_AF.map((v) => ({
+    url: `${BASE}/kwotasie/${v.slug}`,
+    changeFrequency: "weekly" as const,
+    priority: 0.8,
+  }));
+
+  return [...staticPages, ...verticalPages, ...provincePages, ...afrikaansPages];
 }

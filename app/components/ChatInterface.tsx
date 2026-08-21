@@ -9,6 +9,7 @@ import {
   isValidSaPhone,
 } from "@/lib/chat-flow";
 import { PROVINCES } from "@/lib/verticals";
+import { getAttribution, trackConversion } from "@/lib/attribution";
 
 export type Message = {
   role: "user" | "assistant";
@@ -159,10 +160,12 @@ export default function ChatInterface({
           transcript: finalTranscript,
           source:
             new URLSearchParams(window.location.search).get("utm_source") ?? "chat",
+          attribution: getAttribution(),
         }),
       });
       const data = await res.json().catch(() => ({}));
       if (res.ok && data.ok) {
+        trackConversion();
         goTo("done");
       } else {
         setSubmitError(data.error ?? "Something went wrong — please try again.");

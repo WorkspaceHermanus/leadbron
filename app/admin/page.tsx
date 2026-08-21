@@ -22,11 +22,24 @@ export default async function Admin({
     );
   }
 
-  const [leads, orders, available, qualifiedLeads] = await Promise.all([
+  const [leads, orders, available, qualifiedLeads, byKeyword, bySource] = await Promise.all([
     prisma.lead.findMany({ orderBy: { createdAt: "desc" }, take: 100 }),
     prisma.order.findMany({ orderBy: { createdAt: "desc" }, take: 100 }),
     prisma.lead.groupBy({ by: ["vertical"], where: { status: "AVAILABLE" }, _count: { _all: true } }),
     prisma.qualifiedLead.findMany({ orderBy: { createdAt: "desc" }, take: 50 }),
+    prisma.lead.groupBy({
+      by: ["utmTerm"],
+      where: { utmTerm: { not: null } },
+      _count: { _all: true },
+      orderBy: { _count: { utmTerm: "desc" } },
+      take: 25,
+    }),
+    prisma.lead.groupBy({
+      by: ["source"],
+      _count: { _all: true },
+      orderBy: { _count: { source: "desc" } },
+      take: 15,
+    }),
   ]);
 
   const revenueCents = orders
@@ -58,6 +71,24 @@ export default async function Admin({
           rand(o.amountCents),
           o.status,
         ])}
+      />
+
+      <h2 className="mt-12 font-display text-xl font-700">Where leads come from</h2>
+      <Table
+        head={["Source", "Leads"]}
+        rows={bySource.map((s) => [s.source ?? "(direct)", String(s._count._all)])}
+      />
+
+      <h2 className="mt-12 font-display text-xl font-700">
+        Paid keywords producing leads
+      </h2>
+      <p className="mt-1 text-sm text-moss">
+        Which Google Ads search terms actually convert. Pause anything spending
+        with no leads; raise bids on what appears here.
+      </p>
+      <Table
+        head={["Keyword", "Leads"]}
+        rows={byKeyword.map((k) => [k.utmTerm ?? "-", String(k._count._all)])}
       />
 
       <h2 className="mt-12 font-display text-xl font-700">AI Qualified Leads</h2>

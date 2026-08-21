@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { getVertical } from "@/lib/verticals";
 import { dripFill } from "@/lib/fulfil";
+import { parseAttribution } from "@/lib/attribution-server";
 
 export async function POST(req: NextRequest) {
   const body = await req.json().catch(() => null);
@@ -50,6 +51,7 @@ export async function POST(req: NextRequest) {
       source: body.source ? String(body.source).slice(0, 200) : null,
       consentAt: new Date(),
       consentIp: req.headers.get("x-forwarded-for")?.split(",")[0] ?? null,
+      ...parseAttribution(body.attribution),
     },
   });
 

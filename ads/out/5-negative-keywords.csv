@@ -1,0 +1,427 @@
+Campaign,Keyword,Match Type,Status
+LB | AF | Lewensdekking,job,Phrase,Enabled
+LB | AF | Lewensdekking,jobs,Phrase,Enabled
+LB | AF | Lewensdekking,vacancy,Phrase,Enabled
+LB | AF | Lewensdekking,vacancies,Phrase,Enabled
+LB | AF | Lewensdekking,career,Phrase,Enabled
+LB | AF | Lewensdekking,careers,Phrase,Enabled
+LB | AF | Lewensdekking,salary,Phrase,Enabled
+LB | AF | Lewensdekking,hiring,Phrase,Enabled
+LB | AF | Lewensdekking,learnership,Phrase,Enabled
+LB | AF | Lewensdekking,internship,Phrase,Enabled
+LB | AF | Lewensdekking,recruitment,Phrase,Enabled
+LB | AF | Lewensdekking,werk,Phrase,Enabled
+LB | AF | Lewensdekking,werksgeleenthede,Phrase,Enabled
+LB | AF | Lewensdekking,poste,Phrase,Enabled
+LB | AF | Lewensdekking,course,Phrase,Enabled
+LB | AF | Lewensdekking,courses,Phrase,Enabled
+LB | AF | Lewensdekking,study,Phrase,Enabled
+LB | AF | Lewensdekking,qualification,Phrase,Enabled
+LB | AF | Lewensdekking,become a broker,Phrase,Enabled
+LB | AF | Lewensdekking,how to become,Phrase,Enabled
+LB | AF | Lewensdekking,training,Phrase,Enabled
+LB | AF | Lewensdekking,diploma,Phrase,Enabled
+LB | AF | Lewensdekking,degree,Phrase,Enabled
+LB | AF | Lewensdekking,exam,Phrase,Enabled
+LB | AF | Lewensdekking,kursus,Phrase,Enabled
+LB | AF | Lewensdekking,studeer,Phrase,Enabled
+LB | AF | Lewensdekking,claim,Phrase,Enabled
+LB | AF | Lewensdekking,claims,Phrase,Enabled
+LB | AF | Lewensdekking,cancel,Phrase,Enabled
+LB | AF | Lewensdekking,cancellation,Phrase,Enabled
+LB | AF | Lewensdekking,complaint,Phrase,Enabled
+LB | AF | Lewensdekking,complaints,Phrase,Enabled
+LB | AF | Lewensdekking,login,Phrase,Enabled
+LB | AF | Lewensdekking,log in,Phrase,Enabled
+LB | AF | Lewensdekking,contact number,Phrase,Enabled
+LB | AF | Lewensdekking,call centre,Phrase,Enabled
+LB | AF | Lewensdekking,ombudsman,Phrase,Enabled
+LB | AF | Lewensdekking,eis,Phrase,Enabled
+LB | AF | Lewensdekking,kanselleer,Phrase,Enabled
+LB | AF | Lewensdekking,klagte,Phrase,Enabled
+LB | AF | Lewensdekking,template,Phrase,Enabled
+LB | AF | Lewensdekking,pdf,Phrase,Enabled
+LB | AF | Lewensdekking,meaning,Phrase,Enabled
+LB | AF | Lewensdekking,definition,Phrase,Enabled
+LB | AF | Lewensdekking,wikipedia,Phrase,Enabled
+LB | AF | Lewensdekking,what is,Phrase,Enabled
+LB | AF | Lewensdekking,wat is,Phrase,Enabled
+LB | AF | Lewensdekking,difference between,Phrase,Enabled
+LB | AF | Lewensdekking,verskil tussen,Phrase,Enabled
+LB | AF | Lewensdekking,pet insurance,Phrase,Enabled
+LB | AF | Lewensdekking,travel insurance,Phrase,Enabled
+LB | AF | Lewensdekking,cellphone insurance,Phrase,Enabled
+LB | AF | Lewensdekking,phone insurance,Phrase,Enabled
+LB | AF | Lewensdekking,warranty,Phrase,Enabled
+LB | AF | Lewensdekking,extended warranty,Phrase,Enabled
+LB | AF | Lewensdekking,crypto,Phrase,Enabled
+LB | AF | Lewensdekking,loan,Phrase,Enabled
+LB | AF | Lewensdekking,lening,Phrase,Enabled
+LB | AF | Lewensdekking,personal loan,Phrase,Enabled
+LB | AF | Lewensdekking,usa,Phrase,Enabled
+LB | AF | Lewensdekking,uk,Phrase,Enabled
+LB | AF | Lewensdekking,australia,Phrase,Enabled
+LB | AF | Lewensdekking,canada,Phrase,Enabled
+LB | AF | Lewensdekking,india,Phrase,Enabled
+LB | AF | Lewensdekking,nigeria,Phrase,Enabled
+LB | AF | Lewensdekking,kenya,Phrase,Enabled
+LB | AF | Lewensdekking,zimbabwe,Phrase,Enabled
+LB | AF | Lewensdekking,discovery login,Phrase,Enabled
+LB | AF | Lewensdekking,momentum login,Phrase,Enabled
+LB | AF | Lewensdekking,sanlam login,Phrase,Enabled
+LB | AF | Lewensdekking,old mutual login,Phrase,Enabled
+LB | AF | Begrafnisdekking,job,Phrase,Enabled
+LB | AF | Begrafnisdekking,jobs,Phrase,Enabled
+LB | AF | Begrafnisdekking,vacancy,Phrase,Enabled
+LB | AF | Begrafnisdekking,vacancies,Phrase,Enabled
+LB | AF | Begrafnisdekking,career,Phrase,Enabled
+LB | AF | Begrafnisdekking,careers,Phrase,Enabled
+LB | AF | Begrafnisdekking,salary,Phrase,Enabled
+LB | AF | Begrafnisdekking,hiring,Phrase,Enabled
+LB | AF | Begrafnisdekking,learnership,Phrase,Enabled
+LB | AF | Begrafnisdekking,internship,Phrase,Enabled
+LB | AF | Begrafnisdekking,recruitment,Phrase,Enabled
+LB | AF | Begrafnisdekking,werk,Phrase,Enabled
+LB | AF | Begrafnisdekking,werksgeleenthede,Phrase,Enabled
+LB | AF | Begrafnisdekking,poste,Phrase,Enabled
+LB | AF | Begrafnisdekking,course,Phrase,Enabled
+LB | AF | Begrafnisdekking,courses,Phrase,Enabled
+LB | AF | Begrafnisdekking,study,Phrase,Enabled
+LB | AF | Begrafnisdekking,qualification,Phrase,Enabled
+LB | AF | Begrafnisdekking,become a broker,Phrase,Enabled
+LB | AF | Begrafnisdekking,how to become,Phrase,Enabled
+LB | AF | Begrafnisdekking,training,Phrase,Enabled
+LB | AF | Begrafnisdekking,diploma,Phrase,Enabled
+LB | AF | Begrafnisdekking,degree,Phrase,Enabled
+LB | AF | Begrafnisdekking,exam,Phrase,Enabled
+LB | AF | Begrafnisdekking,kursus,Phrase,Enabled
+LB | AF | Begrafnisdekking,studeer,Phrase,Enabled
+LB | AF | Begrafnisdekking,claim,Phrase,Enabled
+LB | AF | Begrafnisdekking,claims,Phrase,Enabled
+LB | AF | Begrafnisdekking,cancel,Phrase,Enabled
+LB | AF | Begrafnisdekking,cancellation,Phrase,Enabled
+LB | AF | Begrafnisdekking,complaint,Phrase,Enabled
+LB | AF | Begrafnisdekking,complaints,Phrase,Enabled
+LB | AF | Begrafnisdekking,login,Phrase,Enabled
+LB | AF | Begrafnisdekking,log in,Phrase,Enabled
+LB | AF | Begrafnisdekking,contact number,Phrase,Enabled
+LB | AF | Begrafnisdekking,call centre,Phrase,Enabled
+LB | AF | Begrafnisdekking,ombudsman,Phrase,Enabled
+LB | AF | Begrafnisdekking,eis,Phrase,Enabled
+LB | AF | Begrafnisdekking,kanselleer,Phrase,Enabled
+LB | AF | Begrafnisdekking,klagte,Phrase,Enabled
+LB | AF | Begrafnisdekking,template,Phrase,Enabled
+LB | AF | Begrafnisdekking,pdf,Phrase,Enabled
+LB | AF | Begrafnisdekking,meaning,Phrase,Enabled
+LB | AF | Begrafnisdekking,definition,Phrase,Enabled
+LB | AF | Begrafnisdekking,wikipedia,Phrase,Enabled
+LB | AF | Begrafnisdekking,what is,Phrase,Enabled
+LB | AF | Begrafnisdekking,wat is,Phrase,Enabled
+LB | AF | Begrafnisdekking,difference between,Phrase,Enabled
+LB | AF | Begrafnisdekking,verskil tussen,Phrase,Enabled
+LB | AF | Begrafnisdekking,pet insurance,Phrase,Enabled
+LB | AF | Begrafnisdekking,travel insurance,Phrase,Enabled
+LB | AF | Begrafnisdekking,cellphone insurance,Phrase,Enabled
+LB | AF | Begrafnisdekking,phone insurance,Phrase,Enabled
+LB | AF | Begrafnisdekking,warranty,Phrase,Enabled
+LB | AF | Begrafnisdekking,extended warranty,Phrase,Enabled
+LB | AF | Begrafnisdekking,crypto,Phrase,Enabled
+LB | AF | Begrafnisdekking,loan,Phrase,Enabled
+LB | AF | Begrafnisdekking,lening,Phrase,Enabled
+LB | AF | Begrafnisdekking,personal loan,Phrase,Enabled
+LB | AF | Begrafnisdekking,usa,Phrase,Enabled
+LB | AF | Begrafnisdekking,uk,Phrase,Enabled
+LB | AF | Begrafnisdekking,australia,Phrase,Enabled
+LB | AF | Begrafnisdekking,canada,Phrase,Enabled
+LB | AF | Begrafnisdekking,india,Phrase,Enabled
+LB | AF | Begrafnisdekking,nigeria,Phrase,Enabled
+LB | AF | Begrafnisdekking,kenya,Phrase,Enabled
+LB | AF | Begrafnisdekking,zimbabwe,Phrase,Enabled
+LB | AF | Begrafnisdekking,discovery login,Phrase,Enabled
+LB | AF | Begrafnisdekking,momentum login,Phrase,Enabled
+LB | AF | Begrafnisdekking,sanlam login,Phrase,Enabled
+LB | AF | Begrafnisdekking,old mutual login,Phrase,Enabled
+LB | AF | Mediese Fonds,job,Phrase,Enabled
+LB | AF | Mediese Fonds,jobs,Phrase,Enabled
+LB | AF | Mediese Fonds,vacancy,Phrase,Enabled
+LB | AF | Mediese Fonds,vacancies,Phrase,Enabled
+LB | AF | Mediese Fonds,career,Phrase,Enabled
+LB | AF | Mediese Fonds,careers,Phrase,Enabled
+LB | AF | Mediese Fonds,salary,Phrase,Enabled
+LB | AF | Mediese Fonds,hiring,Phrase,Enabled
+LB | AF | Mediese Fonds,learnership,Phrase,Enabled
+LB | AF | Mediese Fonds,internship,Phrase,Enabled
+LB | AF | Mediese Fonds,recruitment,Phrase,Enabled
+LB | AF | Mediese Fonds,werk,Phrase,Enabled
+LB | AF | Mediese Fonds,werksgeleenthede,Phrase,Enabled
+LB | AF | Mediese Fonds,poste,Phrase,Enabled
+LB | AF | Mediese Fonds,course,Phrase,Enabled
+LB | AF | Mediese Fonds,courses,Phrase,Enabled
+LB | AF | Mediese Fonds,study,Phrase,Enabled
+LB | AF | Mediese Fonds,qualification,Phrase,Enabled
+LB | AF | Mediese Fonds,become a broker,Phrase,Enabled
+LB | AF | Mediese Fonds,how to become,Phrase,Enabled
+LB | AF | Mediese Fonds,training,Phrase,Enabled
+LB | AF | Mediese Fonds,diploma,Phrase,Enabled
+LB | AF | Mediese Fonds,degree,Phrase,Enabled
+LB | AF | Mediese Fonds,exam,Phrase,Enabled
+LB | AF | Mediese Fonds,kursus,Phrase,Enabled
+LB | AF | Mediese Fonds,studeer,Phrase,Enabled
+LB | AF | Mediese Fonds,claim,Phrase,Enabled
+LB | AF | Mediese Fonds,claims,Phrase,Enabled
+LB | AF | Mediese Fonds,cancel,Phrase,Enabled
+LB | AF | Mediese Fonds,cancellation,Phrase,Enabled
+LB | AF | Mediese Fonds,complaint,Phrase,Enabled
+LB | AF | Mediese Fonds,complaints,Phrase,Enabled
+LB | AF | Mediese Fonds,login,Phrase,Enabled
+LB | AF | Mediese Fonds,log in,Phrase,Enabled
+LB | AF | Mediese Fonds,contact number,Phrase,Enabled
+LB | AF | Mediese Fonds,call centre,Phrase,Enabled
+LB | AF | Mediese Fonds,ombudsman,Phrase,Enabled
+LB | AF | Mediese Fonds,eis,Phrase,Enabled
+LB | AF | Mediese Fonds,kanselleer,Phrase,Enabled
+LB | AF | Mediese Fonds,klagte,Phrase,Enabled
+LB | AF | Mediese Fonds,template,Phrase,Enabled
+LB | AF | Mediese Fonds,pdf,Phrase,Enabled
+LB | AF | Mediese Fonds,meaning,Phrase,Enabled
+LB | AF | Mediese Fonds,definition,Phrase,Enabled
+LB | AF | Mediese Fonds,wikipedia,Phrase,Enabled
+LB | AF | Mediese Fonds,what is,Phrase,Enabled
+LB | AF | Mediese Fonds,wat is,Phrase,Enabled
+LB | AF | Mediese Fonds,difference between,Phrase,Enabled
+LB | AF | Mediese Fonds,verskil tussen,Phrase,Enabled
+LB | AF | Mediese Fonds,pet insurance,Phrase,Enabled
+LB | AF | Mediese Fonds,travel insurance,Phrase,Enabled
+LB | AF | Mediese Fonds,cellphone insurance,Phrase,Enabled
+LB | AF | Mediese Fonds,phone insurance,Phrase,Enabled
+LB | AF | Mediese Fonds,warranty,Phrase,Enabled
+LB | AF | Mediese Fonds,extended warranty,Phrase,Enabled
+LB | AF | Mediese Fonds,crypto,Phrase,Enabled
+LB | AF | Mediese Fonds,loan,Phrase,Enabled
+LB | AF | Mediese Fonds,lening,Phrase,Enabled
+LB | AF | Mediese Fonds,personal loan,Phrase,Enabled
+LB | AF | Mediese Fonds,usa,Phrase,Enabled
+LB | AF | Mediese Fonds,uk,Phrase,Enabled
+LB | AF | Mediese Fonds,australia,Phrase,Enabled
+LB | AF | Mediese Fonds,canada,Phrase,Enabled
+LB | AF | Mediese Fonds,india,Phrase,Enabled
+LB | AF | Mediese Fonds,nigeria,Phrase,Enabled
+LB | AF | Mediese Fonds,kenya,Phrase,Enabled
+LB | AF | Mediese Fonds,zimbabwe,Phrase,Enabled
+LB | AF | Mediese Fonds,discovery login,Phrase,Enabled
+LB | AF | Mediese Fonds,momentum login,Phrase,Enabled
+LB | AF | Mediese Fonds,sanlam login,Phrase,Enabled
+LB | AF | Mediese Fonds,old mutual login,Phrase,Enabled
+LB | AF | Voertuigversekering,job,Phrase,Enabled
+LB | AF | Voertuigversekering,jobs,Phrase,Enabled
+LB | AF | Voertuigversekering,vacancy,Phrase,Enabled
+LB | AF | Voertuigversekering,vacancies,Phrase,Enabled
+LB | AF | Voertuigversekering,career,Phrase,Enabled
+LB | AF | Voertuigversekering,careers,Phrase,Enabled
+LB | AF | Voertuigversekering,salary,Phrase,Enabled
+LB | AF | Voertuigversekering,hiring,Phrase,Enabled
+LB | AF | Voertuigversekering,learnership,Phrase,Enabled
+LB | AF | Voertuigversekering,internship,Phrase,Enabled
+LB | AF | Voertuigversekering,recruitment,Phrase,Enabled
+LB | AF | Voertuigversekering,werk,Phrase,Enabled
+LB | AF | Voertuigversekering,werksgeleenthede,Phrase,Enabled
+LB | AF | Voertuigversekering,poste,Phrase,Enabled
+LB | AF | Voertuigversekering,course,Phrase,Enabled
+LB | AF | Voertuigversekering,courses,Phrase,Enabled
+LB | AF | Voertuigversekering,study,Phrase,Enabled
+LB | AF | Voertuigversekering,qualification,Phrase,Enabled
+LB | AF | Voertuigversekering,become a broker,Phrase,Enabled
+LB | AF | Voertuigversekering,how to become,Phrase,Enabled
+LB | AF | Voertuigversekering,training,Phrase,Enabled
+LB | AF | Voertuigversekering,diploma,Phrase,Enabled
+LB | AF | Voertuigversekering,degree,Phrase,Enabled
+LB | AF | Voertuigversekering,exam,Phrase,Enabled
+LB | AF | Voertuigversekering,kursus,Phrase,Enabled
+LB | AF | Voertuigversekering,studeer,Phrase,Enabled
+LB | AF | Voertuigversekering,claim,Phrase,Enabled
+LB | AF | Voertuigversekering,claims,Phrase,Enabled
+LB | AF | Voertuigversekering,cancel,Phrase,Enabled
+LB | AF | Voertuigversekering,cancellation,Phrase,Enabled
+LB | AF | Voertuigversekering,complaint,Phrase,Enabled
+LB | AF | Voertuigversekering,complaints,Phrase,Enabled
+LB | AF | Voertuigversekering,login,Phrase,Enabled
+LB | AF | Voertuigversekering,log in,Phrase,Enabled
+LB | AF | Voertuigversekering,contact number,Phrase,Enabled
+LB | AF | Voertuigversekering,call centre,Phrase,Enabled
+LB | AF | Voertuigversekering,ombudsman,Phrase,Enabled
+LB | AF | Voertuigversekering,eis,Phrase,Enabled
+LB | AF | Voertuigversekering,kanselleer,Phrase,Enabled
+LB | AF | Voertuigversekering,klagte,Phrase,Enabled
+LB | AF | Voertuigversekering,template,Phrase,Enabled
+LB | AF | Voertuigversekering,pdf,Phrase,Enabled
+LB | AF | Voertuigversekering,meaning,Phrase,Enabled
+LB | AF | Voertuigversekering,definition,Phrase,Enabled
+LB | AF | Voertuigversekering,wikipedia,Phrase,Enabled
+LB | AF | Voertuigversekering,what is,Phrase,Enabled
+LB | AF | Voertuigversekering,wat is,Phrase,Enabled
+LB | AF | Voertuigversekering,difference between,Phrase,Enabled
+LB | AF | Voertuigversekering,verskil tussen,Phrase,Enabled
+LB | AF | Voertuigversekering,pet insurance,Phrase,Enabled
+LB | AF | Voertuigversekering,travel insurance,Phrase,Enabled
+LB | AF | Voertuigversekering,cellphone insurance,Phrase,Enabled
+LB | AF | Voertuigversekering,phone insurance,Phrase,Enabled
+LB | AF | Voertuigversekering,warranty,Phrase,Enabled
+LB | AF | Voertuigversekering,extended warranty,Phrase,Enabled
+LB | AF | Voertuigversekering,crypto,Phrase,Enabled
+LB | AF | Voertuigversekering,loan,Phrase,Enabled
+LB | AF | Voertuigversekering,lening,Phrase,Enabled
+LB | AF | Voertuigversekering,personal loan,Phrase,Enabled
+LB | AF | Voertuigversekering,usa,Phrase,Enabled
+LB | AF | Voertuigversekering,uk,Phrase,Enabled
+LB | AF | Voertuigversekering,australia,Phrase,Enabled
+LB | AF | Voertuigversekering,canada,Phrase,Enabled
+LB | AF | Voertuigversekering,india,Phrase,Enabled
+LB | AF | Voertuigversekering,nigeria,Phrase,Enabled
+LB | AF | Voertuigversekering,kenya,Phrase,Enabled
+LB | AF | Voertuigversekering,zimbabwe,Phrase,Enabled
+LB | AF | Voertuigversekering,discovery login,Phrase,Enabled
+LB | AF | Voertuigversekering,momentum login,Phrase,Enabled
+LB | AF | Voertuigversekering,sanlam login,Phrase,Enabled
+LB | AF | Voertuigversekering,old mutual login,Phrase,Enabled
+LB | EN | Long-tail Life Cover,job,Phrase,Enabled
+LB | EN | Long-tail Life Cover,jobs,Phrase,Enabled
+LB | EN | Long-tail Life Cover,vacancy,Phrase,Enabled
+LB | EN | Long-tail Life Cover,vacancies,Phrase,Enabled
+LB | EN | Long-tail Life Cover,career,Phrase,Enabled
+LB | EN | Long-tail Life Cover,careers,Phrase,Enabled
+LB | EN | Long-tail Life Cover,salary,Phrase,Enabled
+LB | EN | Long-tail Life Cover,hiring,Phrase,Enabled
+LB | EN | Long-tail Life Cover,learnership,Phrase,Enabled
+LB | EN | Long-tail Life Cover,internship,Phrase,Enabled
+LB | EN | Long-tail Life Cover,recruitment,Phrase,Enabled
+LB | EN | Long-tail Life Cover,werk,Phrase,Enabled
+LB | EN | Long-tail Life Cover,werksgeleenthede,Phrase,Enabled
+LB | EN | Long-tail Life Cover,poste,Phrase,Enabled
+LB | EN | Long-tail Life Cover,course,Phrase,Enabled
+LB | EN | Long-tail Life Cover,courses,Phrase,Enabled
+LB | EN | Long-tail Life Cover,study,Phrase,Enabled
+LB | EN | Long-tail Life Cover,qualification,Phrase,Enabled
+LB | EN | Long-tail Life Cover,become a broker,Phrase,Enabled
+LB | EN | Long-tail Life Cover,how to become,Phrase,Enabled
+LB | EN | Long-tail Life Cover,training,Phrase,Enabled
+LB | EN | Long-tail Life Cover,diploma,Phrase,Enabled
+LB | EN | Long-tail Life Cover,degree,Phrase,Enabled
+LB | EN | Long-tail Life Cover,exam,Phrase,Enabled
+LB | EN | Long-tail Life Cover,kursus,Phrase,Enabled
+LB | EN | Long-tail Life Cover,studeer,Phrase,Enabled
+LB | EN | Long-tail Life Cover,claim,Phrase,Enabled
+LB | EN | Long-tail Life Cover,claims,Phrase,Enabled
+LB | EN | Long-tail Life Cover,cancel,Phrase,Enabled
+LB | EN | Long-tail Life Cover,cancellation,Phrase,Enabled
+LB | EN | Long-tail Life Cover,complaint,Phrase,Enabled
+LB | EN | Long-tail Life Cover,complaints,Phrase,Enabled
+LB | EN | Long-tail Life Cover,login,Phrase,Enabled
+LB | EN | Long-tail Life Cover,log in,Phrase,Enabled
+LB | EN | Long-tail Life Cover,contact number,Phrase,Enabled
+LB | EN | Long-tail Life Cover,call centre,Phrase,Enabled
+LB | EN | Long-tail Life Cover,ombudsman,Phrase,Enabled
+LB | EN | Long-tail Life Cover,eis,Phrase,Enabled
+LB | EN | Long-tail Life Cover,kanselleer,Phrase,Enabled
+LB | EN | Long-tail Life Cover,klagte,Phrase,Enabled
+LB | EN | Long-tail Life Cover,template,Phrase,Enabled
+LB | EN | Long-tail Life Cover,pdf,Phrase,Enabled
+LB | EN | Long-tail Life Cover,meaning,Phrase,Enabled
+LB | EN | Long-tail Life Cover,definition,Phrase,Enabled
+LB | EN | Long-tail Life Cover,wikipedia,Phrase,Enabled
+LB | EN | Long-tail Life Cover,what is,Phrase,Enabled
+LB | EN | Long-tail Life Cover,wat is,Phrase,Enabled
+LB | EN | Long-tail Life Cover,difference between,Phrase,Enabled
+LB | EN | Long-tail Life Cover,verskil tussen,Phrase,Enabled
+LB | EN | Long-tail Life Cover,pet insurance,Phrase,Enabled
+LB | EN | Long-tail Life Cover,travel insurance,Phrase,Enabled
+LB | EN | Long-tail Life Cover,cellphone insurance,Phrase,Enabled
+LB | EN | Long-tail Life Cover,phone insurance,Phrase,Enabled
+LB | EN | Long-tail Life Cover,warranty,Phrase,Enabled
+LB | EN | Long-tail Life Cover,extended warranty,Phrase,Enabled
+LB | EN | Long-tail Life Cover,crypto,Phrase,Enabled
+LB | EN | Long-tail Life Cover,loan,Phrase,Enabled
+LB | EN | Long-tail Life Cover,lening,Phrase,Enabled
+LB | EN | Long-tail Life Cover,personal loan,Phrase,Enabled
+LB | EN | Long-tail Life Cover,usa,Phrase,Enabled
+LB | EN | Long-tail Life Cover,uk,Phrase,Enabled
+LB | EN | Long-tail Life Cover,australia,Phrase,Enabled
+LB | EN | Long-tail Life Cover,canada,Phrase,Enabled
+LB | EN | Long-tail Life Cover,india,Phrase,Enabled
+LB | EN | Long-tail Life Cover,nigeria,Phrase,Enabled
+LB | EN | Long-tail Life Cover,kenya,Phrase,Enabled
+LB | EN | Long-tail Life Cover,zimbabwe,Phrase,Enabled
+LB | EN | Long-tail Life Cover,discovery login,Phrase,Enabled
+LB | EN | Long-tail Life Cover,momentum login,Phrase,Enabled
+LB | EN | Long-tail Life Cover,sanlam login,Phrase,Enabled
+LB | EN | Long-tail Life Cover,old mutual login,Phrase,Enabled
+LB | EN | Medical Aid,job,Phrase,Enabled
+LB | EN | Medical Aid,jobs,Phrase,Enabled
+LB | EN | Medical Aid,vacancy,Phrase,Enabled
+LB | EN | Medical Aid,vacancies,Phrase,Enabled
+LB | EN | Medical Aid,career,Phrase,Enabled
+LB | EN | Medical Aid,careers,Phrase,Enabled
+LB | EN | Medical Aid,salary,Phrase,Enabled
+LB | EN | Medical Aid,hiring,Phrase,Enabled
+LB | EN | Medical Aid,learnership,Phrase,Enabled
+LB | EN | Medical Aid,internship,Phrase,Enabled
+LB | EN | Medical Aid,recruitment,Phrase,Enabled
+LB | EN | Medical Aid,werk,Phrase,Enabled
+LB | EN | Medical Aid,werksgeleenthede,Phrase,Enabled
+LB | EN | Medical Aid,poste,Phrase,Enabled
+LB | EN | Medical Aid,course,Phrase,Enabled
+LB | EN | Medical Aid,courses,Phrase,Enabled
+LB | EN | Medical Aid,study,Phrase,Enabled
+LB | EN | Medical Aid,qualification,Phrase,Enabled
+LB | EN | Medical Aid,become a broker,Phrase,Enabled
+LB | EN | Medical Aid,how to become,Phrase,Enabled
+LB | EN | Medical Aid,training,Phrase,Enabled
+LB | EN | Medical Aid,diploma,Phrase,Enabled
+LB | EN | Medical Aid,degree,Phrase,Enabled
+LB | EN | Medical Aid,exam,Phrase,Enabled
+LB | EN | Medical Aid,kursus,Phrase,Enabled
+LB | EN | Medical Aid,studeer,Phrase,Enabled
+LB | EN | Medical Aid,claim,Phrase,Enabled
+LB | EN | Medical Aid,claims,Phrase,Enabled
+LB | EN | Medical Aid,cancel,Phrase,Enabled
+LB | EN | Medical Aid,cancellation,Phrase,Enabled
+LB | EN | Medical Aid,complaint,Phrase,Enabled
+LB | EN | Medical Aid,complaints,Phrase,Enabled
+LB | EN | Medical Aid,login,Phrase,Enabled
+LB | EN | Medical Aid,log in,Phrase,Enabled
+LB | EN | Medical Aid,contact number,Phrase,Enabled
+LB | EN | Medical Aid,call centre,Phrase,Enabled
+LB | EN | Medical Aid,ombudsman,Phrase,Enabled
+LB | EN | Medical Aid,eis,Phrase,Enabled
+LB | EN | Medical Aid,kanselleer,Phrase,Enabled
+LB | EN | Medical Aid,klagte,Phrase,Enabled
+LB | EN | Medical Aid,template,Phrase,Enabled
+LB | EN | Medical Aid,pdf,Phrase,Enabled
+LB | EN | Medical Aid,meaning,Phrase,Enabled
+LB | EN | Medical Aid,definition,Phrase,Enabled
+LB | EN | Medical Aid,wikipedia,Phrase,Enabled
+LB | EN | Medical Aid,what is,Phrase,Enabled
+LB | EN | Medical Aid,wat is,Phrase,Enabled
+LB | EN | Medical Aid,difference between,Phrase,Enabled
+LB | EN | Medical Aid,verskil tussen,Phrase,Enabled
+LB | EN | Medical Aid,pet insurance,Phrase,Enabled
+LB | EN | Medical Aid,travel insurance,Phrase,Enabled
+LB | EN | Medical Aid,cellphone insurance,Phrase,Enabled
+LB | EN | Medical Aid,phone insurance,Phrase,Enabled
+LB | EN | Medical Aid,warranty,Phrase,Enabled
+LB | EN | Medical Aid,extended warranty,Phrase,Enabled
+LB | EN | Medical Aid,crypto,Phrase,Enabled
+LB | EN | Medical Aid,loan,Phrase,Enabled
+LB | EN | Medical Aid,lening,Phrase,Enabled
+LB | EN | Medical Aid,personal loan,Phrase,Enabled
+LB | EN | Medical Aid,usa,Phrase,Enabled
+LB | EN | Medical Aid,uk,Phrase,Enabled
+LB | EN | Medical Aid,australia,Phrase,Enabled
+LB | EN | Medical Aid,canada,Phrase,Enabled
+LB | EN | Medical Aid,india,Phrase,Enabled
+LB | EN | Medical Aid,nigeria,Phrase,Enabled
+LB | EN | Medical Aid,kenya,Phrase,Enabled
+LB | EN | Medical Aid,zimbabwe,Phrase,Enabled
+LB | EN | Medical Aid,discovery login,Phrase,Enabled
+LB | EN | Medical Aid,momentum login,Phrase,Enabled
+LB | EN | Medical Aid,sanlam login,Phrase,Enabled
+LB | EN | Medical Aid,old mutual login,Phrase,Enabled

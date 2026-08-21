@@ -1,6 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import { getAttribution, trackConversion } from "@/lib/attribution";
 
 const zar = new Intl.NumberFormat("en-ZA", {
   style: "currency",
@@ -280,10 +281,14 @@ function LeadCapture({ provinces, summary }: { provinces: string[]; summary: str
         source:
           new URLSearchParams(window.location.search).get("utm_source") ??
           "life-cover-calculator",
+        attribution: getAttribution(),
       }),
     });
 
-    if (res.ok) setState("done");
+    if (res.ok) {
+      trackConversion();
+      setState("done");
+    }
     else {
       const data = await res.json().catch(() => ({}));
       setError(data.error ?? "Something went wrong. Please check your details and try again.");

@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { getVertical, PROVINCES } from "@/lib/verticals";
 import { dripFill } from "@/lib/fulfil";
+import { parseAttribution } from "@/lib/attribution-server";
 import {
   CATEGORY_VERTICAL,
   scoreAnswers,
@@ -170,6 +171,7 @@ export async function POST(req: NextRequest) {
       qualifiedLeadId: qualifiedLead.id,
       confidenceScore,
       conversationTranscript: transcript,
+      ...parseAttribution(body.attribution),
     },
   });
 

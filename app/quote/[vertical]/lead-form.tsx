@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { getAttribution, trackConversion } from "@/lib/attribution";
 
 export default function LeadForm({
   vertical,
@@ -41,10 +42,14 @@ export default function LeadForm({
         website: get("website"), // honeypot
         consent: true,
         source: new URLSearchParams(window.location.search).get("utm_source") ?? undefined,
+        attribution: getAttribution(),
       }),
     });
 
-    if (res.ok) setState("done");
+    if (res.ok) {
+      trackConversion();
+      setState("done");
+    }
     else {
       const data = await res.json().catch(() => ({}));
       setError(data.error ?? "Something went wrong. Please check your details and try again.");

@@ -62,9 +62,28 @@ model Lead {
   qualifiedLead         QualifiedLead? @relation(fields: [qualifiedLeadId], references: [id])
   confidenceScore       Int?       // 0-100, inherited from AI
   conversationTranscript Json?     // Full chat history for context
+
+  // --- Paid acquisition attribution ---
+  // gclid lets us upload offline conversions back to Google Ads, so bidding
+  // optimises for leads that became real sales, not just form fills.
+  gclid                 String?
+  utmSource             String?
+  utmMedium             String?
+  utmCampaign           String?
+  utmTerm               String?   // the keyword that produced the click
+  utmContent            String?   // which ad variant
+  landingPage           String?
+  // Set once an adviser confirms the lead turned into business, so the
+  // value can be reported back to Google.
+  saleValueCents        Int?
+  saleConfirmedAt       DateTime?
+  uploadedToAdsAt       DateTime?
+
   createdAt             DateTime   @default(now())
 
   @@index([vertical, status])
+  @@index([gclid])
+  @@index([utmCampaign])
 }
 
 model Conversation {
